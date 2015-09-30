@@ -9,3 +9,9 @@
 </div>
 </script>
 
+<script id="main_board_template" type="text/html">
+<div>
+
+</div>
+</script>
+
