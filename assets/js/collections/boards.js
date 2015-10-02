@@ -5,20 +5,22 @@ function Boards() {
     fetch: function(options) {
       var self = this;
 
-      Trill.Client.Trello.get('members/me/boards').done(function(result) {
-        self.models = [];
-        var temp;
-        for (var i in result) {
-          temp = new Trill.Models.Board(result[i])
-          temp.lists.fetch();
-          self.models.push(temp);
-        }
+      Trill.Client.Trello.get('members/me/boards').done(
+        function(result) {
+          self.models = [];
+          var temp;
+          for (var i in result) {
+            temp = new Trill.Models.Board(result[i])
+            temp.lists.fetch();
 
-        if (options && options.success) {
-          options.success.call(self, result);
-        }
+            self.models.push(temp);
+          }
 
-        // $(self).trigger('boardsSync');
+          if (options && options.success) {
+            options.success.call(self, result);
+          }
+
+          // $(self).trigger('boardsSync');
       });
     },
 

@@ -6,20 +6,21 @@ function Lists(options) {
     fetch: function() {
       var self = this;
 
-      Trill.Client.Trello.get('/boards/' + self.options.board_id.toString() + '/lists').done(function(result) {
-        self.models = [];
-        var temp;
-        for (var i in result) {
-          temp = new Trill.Models.List(result[i]);
-          temp.cards.fetch();
-          self.models.push(temp);
-        }
+      Trill.Client.Trello.get('/boards/' + self.options.board_id.toString() + '/lists').done(
+        function(result) {
+          self.models = [];
+          var temp;
+          for (var i in result) {
+            temp = new Trill.Models.List(result[i]);
+            temp.cards.fetch();
+            self.models.push(temp);
+          }
 
-        if (options && options.success) {
-          options.success.call(self, result);
-        }
+          if (options && options.success) {
+            options.success.call(self, result);
+          }
 
-        // $(self).trigger('boardsSync');
+          // $(self).trigger('boardsSync');
       });
     },
 

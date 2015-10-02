@@ -6,19 +6,13 @@ function Cards(options) {
     fetch: function() {
       var self = this;
       var temp;
-      console.log(self.options, 'lists/' + self.options.list_id.toString() + '/cards');
-      Trill.Client.Trello.get('lists/' + self.options.list_id.toString() + '/cards', {
-        success: function(results) {
-          console.log('cards', results);
+
+      Trill.Client.Trello.get('lists/' + self.options.list_id.toString() + '/cards').done(
+        function(results) {
           for (var i in results) {
-            console.log(i, results[i]);
             temp = new Trill.Models.Card(results[i]);
             self.models.push(temp);
           }
-        },
-        then: function(result) {
-          console.log('then', result);
-        }
       });
     },
 
