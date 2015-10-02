@@ -49,6 +49,8 @@
         .script('assets/js/libs/ICanHaz.min.js')
         .script('assets/js/libs/underscore-min.js').wait()
         .script('assets/gridstack/gridstack.min.js').wait()
+        .script('assets/js/models/card.js').wait()
+        .script('assets/js/collections/cards.js').wait()
         .script('assets/js/models/list.js').wait()
         .script('assets/js/collections/lists.js').wait()
         .script('assets/js/models/board.js').wait()

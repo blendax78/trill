@@ -3,14 +3,15 @@ function Lists(options) {
     options: options,
     models: [],
 
-    fetch: function(options) {
+    fetch: function() {
       var self = this;
-  
-      Trill.Client.Trello.get('/boards/' + self.options.id.toString() + '/lists').done(function(result) {
+
+      Trill.Client.Trello.get('/boards/' + self.options.board_id.toString() + '/lists').done(function(result) {
         self.models = [];
         var temp;
         for (var i in result) {
-          temp = new Trill.Models.List(result[i])
+          temp = new Trill.Models.List(result[i]);
+          temp.cards.fetch();
           self.models.push(temp);
         }
 

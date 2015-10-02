@@ -1,16 +1,7 @@
 function List(model) {
   return {
     attributes: model,
-    
-    fetchLists: function() {
-      var self = this;
-      // this.attributes.lists = new Trill.Models.List();
-      // this.attributes.lists.fetch({
-      //   success: function(result) {
-      //     console.log('success', result);
-      //   }
-      // });
-    }
+    cards: new Trill.Collections.Cards({ list_id: model.id }),
   }
 }
 

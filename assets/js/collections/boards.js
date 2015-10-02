@@ -10,7 +10,7 @@ function Boards() {
         var temp;
         for (var i in result) {
           temp = new Trill.Models.Board(result[i])
-          temp.fetchLists();
+          temp.lists.fetch();
           self.models.push(temp);
         }
 
