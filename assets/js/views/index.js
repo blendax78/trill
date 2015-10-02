@@ -5,12 +5,11 @@ function IndexView () {
     events: {
       '.board-select' : { event: 'click', function: 'changeBoard' }
     },
-    
+
     bindEvents: function() {
       var self = this;
 
       for (var elem in this.events) {
-        console.log($(elem), this.events[elem].event);
         $(elem).on(this.events[elem].event, self[this.events[elem].function]);
       }
       

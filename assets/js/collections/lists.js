@@ -1,16 +1,16 @@
-function Boards() {
+function Lists(options) {
   return {
+    options: options,
     models: [],
 
     fetch: function(options) {
       var self = this;
-
-      Trill.Client.Trello.get('members/me/boards').done(function(result) {
+  
+      Trill.Client.Trello.get('/boards/' + self.options.id.toString() + '/lists').done(function(result) {
         self.models = [];
         var temp;
         for (var i in result) {
-          temp = new Trill.Models.Board(result[i])
-          temp.fetchLists();
+          temp = new Trill.Models.List(result[i])
           self.models.push(temp);
         }
 
@@ -28,4 +28,4 @@ function Boards() {
   };
 }
 
-Trill.Collections.Boards = new Boards();
+Trill.Collections.Lists = Lists;
