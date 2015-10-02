@@ -11,3 +11,7 @@ Basic setup: Requires a config.json to be in the root folder (same as index.php)
     "api_secret" : "<secret>"
   }
 ```
+
+**To Do**:
+- Convert to Backbone
+- call cards from board level, instead of list level
