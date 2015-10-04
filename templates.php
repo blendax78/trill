@@ -42,9 +42,11 @@
 </script>
 
 <script id="card_template" type="text/html">
-  <div class="grid-stack-item" data-gs-auto-position="1" data-gs-width="2" data-gs-height="3">
+  <div class="grid-stack-item" data-gs-auto-position="1" data-gs-width="3" data-gs-height="3">
     {{#attributes}}
-      <div class="card grid-stack-item-content">{{name}}</div>
+      <p>
+        <div class="card grid-stack-item-content">{{name}}</div>
+      </p>
     {{/attributes}}
   </div>
 </script>
