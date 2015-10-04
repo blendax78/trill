@@ -16,16 +16,21 @@ function Boards() {
             self.models.push(temp);
           }
 
+          self.sort();
+          self.current_board = self.models[0];
+
           if (options && options.success) {
             options.success.call(self, result);
           }
 
-          // $(self).trigger('boardsSync');
+          $(self).trigger('boardsSync');
       });
     },
 
     sort: function() {
-      _.sortBy(this.models, 'name');
+      _.sortBy(this.models, function(model) {
+        return model.attributes.name;
+      });
     }
   };
 }

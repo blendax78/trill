@@ -31,6 +31,9 @@
     <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap-theme.min.css">
     <link rel="stylesheet" type="text/css" href="assets/gridstack/gridstack.min.css">
     <link rel="stylesheet" type="text/css" href="assets/gridstack/gridstack-extra.min.css">
+    
+    <div id="body"></div>
+    
     <?php include('templates.php'); ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Get your API Key here: https://trello.com/app-key -->

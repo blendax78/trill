@@ -11,7 +11,14 @@
 
 <script id="main_board_template" type="text/html">
 <div>
-
+  {{#board}}
+    {{name}}
+  {{/board}}
 </div>
 </script>
 
+<script id="card_template" type="text/html">
+  <div class="card">
+    {{name}}
+  </div>
+</script>

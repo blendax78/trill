@@ -16,13 +16,24 @@ function IndexView () {
     },
     
     changeBoard: function(evt) {
-      console.log('click', evt);
+      var $elem = $(evt.target);
+      var arr = _.filter(Trill.Collections.Boards.models, function(board) {
+        console.log(board.attributes, $elem.data().id);
+        return _.some(board.attributes, { id: $elem.data().id });
+      });
+      console.log(arr);
+    },
+    
+    renderBoard: function(board) {
+      $('#body').html(ich.main_board_template({ board: board.attributes }).html());
+      $('body').css('backgroundColor', board.attributes.prefs.backgroundColor);
     },
 
     render: function() {
-      // $(Trill.Collections.Boards).on('boardsSync', function() {
-      //   $('#board_change').append(ich.board_change_template({ boards: result }).html());
-      // });
+      var self = this;
+      $(Trill.Collections.Boards).on('boardsSync', function() {
+        self.renderBoard(Trill.Collections.Boards.current_board);
+      });
 
       var self = this;
       Trill.Collections.Boards.fetch({
