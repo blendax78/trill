@@ -1,7 +1,7 @@
 function IndexView () {
 
   return {
-    el: '#main-container',
+    el: '#body',
     events: {
       '.board-select' : { event: 'click', function: 'changeBoard' }
     },
@@ -12,20 +12,17 @@ function IndexView () {
       for (var elem in this.events) {
         $(elem).on(this.events[elem].event, self[this.events[elem].function]);
       }
-      
     },
     
     changeBoard: function(evt) {
       var $elem = $(evt.target);
-      var arr = _.filter(Trill.Collections.Boards.models, function(board) {
-        console.log(board.attributes, $elem.data().id);
-        return _.some(board.attributes, { id: $elem.data().id });
-      });
-      console.log(arr);
+      
+      var board = _.findWhere(Trill.Collections.Boards.models, { id: $elem.data().id });
+      Trill.Views.IndexView.renderBoard(board);
     },
     
     renderBoard: function(board) {
-      $('#body').html(ich.main_board_template({ board: board.attributes }).html());
+      $(this.el).html(ich.main_board_template({ board: board.attributes }).html());
       $('body').css('backgroundColor', board.attributes.prefs.backgroundColor);
     },
 
@@ -33,15 +30,12 @@ function IndexView () {
       var self = this;
       $(Trill.Collections.Boards).on('boardsSync', function() {
         self.renderBoard(Trill.Collections.Boards.current_board);
+        $('#board_change').html(ich.board_change_template({ boards: Trill.Collections.Boards.models }).html());
+        self.bindEvents();
       });
 
       var self = this;
-      Trill.Collections.Boards.fetch({
-        success: function(result) {
-          $('#board_change').html(ich.board_change_template({ boards: result }).html());
-          self.bindEvents();
-        }
-      });
+      Trill.Collections.Boards.fetch();
       // var template = ich.bookmark_template({ models: this.collection.toJSON() });
       // this.$el.html(template);
 

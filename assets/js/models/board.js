@@ -1,6 +1,7 @@
 function Board(model) {
   return {
     attributes: model,
+    id: model.id,
     lists: new Trill.Collections.Lists({ board_id: model.id }),
   }
 }

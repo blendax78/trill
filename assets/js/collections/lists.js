@@ -11,6 +11,10 @@ function Lists(options) {
           self.models = [];
           var temp;
           for (var i in result) {
+            if (result[i].closed) {
+              continue;
+            }
+
             temp = new Trill.Models.List(result[i]);
             temp.cards.fetch();
             self.models.push(temp);

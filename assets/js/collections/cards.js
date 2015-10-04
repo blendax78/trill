@@ -10,6 +10,10 @@ function Cards(options) {
       Trill.Client.Trello.get('lists/' + self.options.list_id.toString() + '/cards').done(
         function(results) {
           for (var i in results) {
+            if (results[i].closed) {
+              continue;
+            }
+
             temp = new Trill.Models.Card(results[i]);
             self.models.push(temp);
           }

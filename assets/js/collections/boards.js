@@ -10,6 +10,10 @@ function Boards() {
           self.models = [];
           var temp;
           for (var i in result) {
+            if (result[i].closed) {
+              continue;
+            }
+
             temp = new Trill.Models.Board(result[i])
             temp.lists.fetch();
 
