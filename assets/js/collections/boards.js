@@ -26,8 +26,6 @@ function Boards() {
           if (options && options.success) {
             options.success.call(self, result);
           }
-
-          $(self).trigger('boardsSync');
       });
     },
 

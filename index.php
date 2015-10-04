@@ -31,7 +31,9 @@
     <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap-theme.min.css">
     <link rel="stylesheet" type="text/css" href="assets/gridstack/gridstack.min.css">
     <link rel="stylesheet" type="text/css" href="assets/gridstack/gridstack-extra.min.css">
-    
+    <link rel="stylesheet" type="text/css" href="assets/jquery-ui-1.11.4/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/trill.css">
+
     <div id="body"></div>
     
     <?php include('templates.php'); ?>
@@ -51,6 +53,7 @@
         .script('assets/bootstrap/js/bootstrap.min.js')
         .script('assets/js/libs/ICanHaz.min.js')
         .script('assets/js/libs/underscore-min.js').wait()
+        .script('assets/jquery-ui-1.11.4/jquery-ui.min.js')
         .script('assets/gridstack/gridstack.min.js').wait()
         .script('assets/js/models/card.js').wait()
         .script('assets/js/collections/cards.js').wait()

@@ -17,6 +17,8 @@ function Cards(options) {
             temp = new Trill.Models.Card(results[i]);
             self.models.push(temp);
           }
+
+          $('body').trigger('boardsSync');
       });
     },
 

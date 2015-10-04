@@ -12,15 +12,39 @@
 </script>
 
 <script id="main_board_template" type="text/html">
-<div>
+<div class="row">
   {{#board}}
-    {{name}}
+    {{#attributes}}
+      <h1>{{name}}</h1>
+    {{/attributes}}
+    {{#lists}}
+      {{#models}}
+        {{>list_template}}
+      {{/models}}
+    {{/lists}}
   {{/board}}
 </div>
 </script>
 
+<script id="list_template" type="text/html">
+  <div class="row">
+    {{#attributes}}
+    <h4>{{name}}</h4>
+    {{/attributes}}
+    {{#cards}}
+      <div class="grid-stack">
+        {{#models}}
+          {{>card_template}}
+        {{/models}}
+      </div>
+    {{/cards}}
+  </div>
+</script>
+
 <script id="card_template" type="text/html">
-  <div class="card">
-    {{name}}
+  <div class="grid-stack-item" data-gs-auto-position="1" data-gs-width="2" data-gs-height="3">
+    {{#attributes}}
+      <div class="card grid-stack-item-content">{{name}}</div>
+    {{/attributes}}
   </div>
 </script>

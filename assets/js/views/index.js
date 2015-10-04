@@ -22,13 +22,18 @@ function IndexView () {
     },
     
     renderBoard: function(board) {
-      $(this.el).html(ich.main_board_template({ board: board.attributes }).html());
+      $(this.el).html(ich.main_board_template({ board: board, lists: board.lists.models }).html());
       $('body').css('backgroundColor', board.attributes.prefs.backgroundColor);
+      
+      var options = {
+          animate: true
+      };
+      $('.grid-stack').gridstack(options);
     },
 
     render: function() {
       var self = this;
-      $(Trill.Collections.Boards).on('boardsSync', function() {
+      $('body').on('boardsSync', function() {
         self.renderBoard(Trill.Collections.Boards.current_board);
         $('#board_change').html(ich.board_change_template({ boards: Trill.Collections.Boards.models }).html());
         self.bindEvents();
@@ -36,10 +41,6 @@ function IndexView () {
 
       var self = this;
       Trill.Collections.Boards.fetch();
-      // var template = ich.bookmark_template({ models: this.collection.toJSON() });
-      // this.$el.html(template);
-
-
     }
   }
 }

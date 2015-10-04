@@ -12,3 +12,7 @@ Basic setup: Requires a config.json to be in the root folder (same as index.php)
   }
 ```
 
+**To Do**
+Speed up initial load
+convert to backbone
+fetch attachments (GET /1/cards/[card id or shortlink]/attachments)
