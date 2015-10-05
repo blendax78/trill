@@ -12,7 +12,6 @@ function init() {
         success: function() {
           Trill.Views.IndexView = new IndexView();
           Trill.Views.IndexView.render();
-          // $('#board_change').append(ich.board_change_template().html())
         }
       });
     },

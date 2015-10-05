@@ -1,6 +1,8 @@
 function Boards() {
   return {
     models: [],
+    lists: [],
+    cards: [],
 
     fetch: function(options) {
       var self = this;
