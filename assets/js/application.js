@@ -10,8 +10,10 @@ function init() {
     success: function() {
       Trill.Models.Me.fetch({
         success: function() {
-          Trill.Views.IndexView = new IndexView();
-          Trill.Views.IndexView.render();
+          // Trill.Views.IndexView = new IndexView();
+          // Trill.Views.IndexView.render();
+          Trill.Router.router = new Router();
+          Backbone.history.start();
         }
       });
     },

@@ -48,13 +48,17 @@
       Trill.Models = {}; // Note: The Models namespace will not hold instantiated objects.
       Trill.Collections = {};
       Trill.Client = {};
+      Trill.Router = {};
 
       $LAB
         .script('assets/bootstrap/js/bootstrap.min.js')
         .script('assets/js/libs/ICanHaz.min.js')
         .script('assets/js/libs/underscore-min.js').wait()
-        .script('assets/jquery-ui-1.11.4/jquery-ui.min.js')
+        .script('assets/js/libs/backbone-min.js').wait()
+        .script('assets/jquery-ui-1.11.4/jquery-ui.min.js').wait()
         .script('assets/gridstack/gridstack.min.js').wait()
+        .script('assets/js/models/attachment.js').wait()
+        .script('assets/js/collections/attachments.js').wait()
         .script('assets/js/models/card.js').wait()
         .script('assets/js/collections/cards.js').wait()
         .script('assets/js/models/list.js').wait()
@@ -63,6 +67,7 @@
         .script('assets/js/models/me.js').wait()
         .script('assets/js/collections/boards.js').wait()
         .script('assets/js/views/index.js').wait()
+        .script('assets/js/router.js').wait()
         .script('assets/js/application.js').wait(function() {
           init();
         });

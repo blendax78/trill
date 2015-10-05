@@ -1,9 +1,6 @@
-function List(model) {
-  return {
-    attributes: model,
-    cards: new Trill.Collections.Cards({ list_id: model.id }),
+Trill.Models.List = Backbone.Model.extend({
+  initialize: function() {
+    // var self = this;
+    // this.lists = new Trill.Collections.Lists({ board_id: self.get('id') });
   }
-}
-
-// Only uninstantiated class is accessible via namespacing.
-Trill.Models.List = List;
+});

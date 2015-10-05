@@ -1,8 +1,9 @@
-function Card(model) {
-  return {
-    attributes: model,
-  }
-}
+Trill.Models.Card = Backbone.Model.extend({
+  initialize: function() {
+    var self = this;
+    var attachments = new Trill.Collections.Attachments({ card_id: self.get('id') });
+    attachments.fetch();
 
-// Only uninstantiated class is accessible via namespacing.
-Trill.Models.Card = Card;
+    this.set('attachments', attachments);
+  }
+});

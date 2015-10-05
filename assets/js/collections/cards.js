@@ -1,31 +1,30 @@
-function Cards(options) {
-  return {
-    options: options,
-    models: [],
+Trill.Collections.Cards = Backbone.Collection.extend({
+  model: Trill.Models.Card,
 
-    fetch: function() {
-      var self = this;
-      var temp;
+  initialize: function () {
+  },
 
-      Trill.Client.Trello.get('lists/' + self.options.list_id.toString() + '/cards').done(
-        function(results) {
-          for (var i in results) {
-            if (results[i].closed) {
-              continue;
-            }
+  comparator: function (card) {
+    return card.get('name');
+  },
 
-            temp = new Trill.Models.Card(results[i]);
-            self.models.push(temp);
+  fetch: function(board_id) {
+    var self = this;
+    var temp;
+
+    Trill.Client.Trello.get('boards/' + board_id.toString() + '/cards').done(
+      function(results) {
+        for (var i in results) {
+          if (results[i].closed) {
+            continue;
           }
 
-          $('body').trigger('boardsSync');
-      });
-    },
+          temp = new Trill.Models.Card(results[i]);
+          self.models.push(temp);
+        }
 
-    sort: function() {
-      _.sortBy(this.models, 'name');
-    }
-  };
-}
-
-Trill.Collections.Cards = Cards;
+        $('body').trigger('boardsSync');
+        self.trigger('sync');
+    });
+  },
+});

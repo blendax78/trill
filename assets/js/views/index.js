@@ -1,46 +1,58 @@
-function IndexView () {
+Trill.Views.IndexView = Backbone.View.extend({
+  el: '#body',
 
-  return {
-    el: '#body',
-    events: {
-      '.board-select' : { event: 'click', function: 'changeBoard' }
-    },
+  events: {
+      'click .board-select': 'changeBoard'
+  },
 
-    bindEvents: function() {
-      var self = this;
+  initialize: function() {
+    var self = this;
+    this.boards = new Trill.Collections.Boards();
+    this.lists = new Trill.Collections.Lists();
+    this.cards = new Trill.Collections.Cards();
 
-      for (var elem in this.events) {
-        $(elem).on(this.events[elem].event, self[this.events[elem].function]);
+    _.bindAll(this, 'changeBoard', 'renderBoard');
+
+    $('#body').on('boardsSync', function() {
+      this.current_board = this.current_board || this.boards[0];
+      self.renderBoard(this.current_board);
+      $('#board_change').html(ich.board_change_template({ boards: self.boards.models }).html());
+    });
+
+    this.boards.on('sync', function() {
+      // 'this' refers to this.boards in this context.
+      for (var i in this.models) {
+        self.lists.fetch(this.models[i].get('id'));
+        self.cards.fetch(this.models[i].get('id'));
       }
-    },
+    });
+  },
+  
+  changeBoard: function(evt) {
+    var $elem = $(evt.target);
     
-    changeBoard: function(evt) {
-      var $elem = $(evt.target);
-      
-      var board = _.findWhere(Trill.Collections.Boards.models, { id: $elem.data().id });
-      Trill.Views.IndexView.renderBoard(board);
-    },
+    var board = _.findWhere(this.boards.models, { id: $elem.data().id });
+    this.current_board = board;
+    this.renderBoard(board);
+  },
+  
+  renderBoard: function(board) {
+    $(this.el).html(ich.main_board_template({ board: board, lists: board.lists.models }).html());
+    $('body').css('backgroundColor', board.attributes.prefs.backgroundColor);
     
-    renderBoard: function(board) {
-      $(this.el).html(ich.main_board_template({ board: board, lists: board.lists.models }).html());
-      $('body').css('backgroundColor', board.attributes.prefs.backgroundColor);
-      
-      var options = {
-          animate: true
-      };
-      $('.grid-stack').gridstack(options);
-    },
+    var options = {
+        animate: true
+    };
+    $('.grid-stack').gridstack(options);
+  },
 
-    render: function() {
-      var self = this;
-      $('body').on('boardsSync', function() {
-        self.renderBoard(Trill.Collections.Boards.current_board);
-        $('#board_change').html(ich.board_change_template({ boards: Trill.Collections.Boards.models }).html());
-        self.bindEvents();
-      });
+  render: function() {
+    this.boards.fetch();
 
-      var self = this;
-      Trill.Collections.Boards.fetch();
-    }
+    // { success: function(boards) {
+    //   for (var i in boards.models) {
+    //     self.lists.fetch(boards.models[i].get('id'));
+    //   }
+    // }
   }
-}
+});
