@@ -20,7 +20,6 @@ Trill.Collections.Boards = Backbone.Collection.extend({
           }
 
           temp = new Trill.Models.Board(result[i])
-          // temp.lists.fetch();
 
           self.models.push(temp);
         }

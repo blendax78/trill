@@ -20,12 +20,17 @@ Trill.Views.IndexView = Backbone.View.extend({
     });
 
     this.boards.on('sync', function() {
+      self.current_board = this.models[0];
       // 'this' refers to this.boards in this context.
       for (var i in this.models) {
         self.lists.fetch(this.models[i].get('id'));
         self.cards.fetch(this.models[i].get('id'));
       }
+
+      self.renderBoard(self.current_board);
     });
+
+    this.boards.fetch();
   },
   
   changeBoard: function(evt) {
@@ -37,7 +42,7 @@ Trill.Views.IndexView = Backbone.View.extend({
   },
   
   renderBoard: function(board) {
-    $(this.el).html(ich.main_board_template({ board: board, lists: board.lists.models }).html());
+    $(this.el).html(ich.main_board_template({ board: board, lists: [] }).html());
     $('body').css('backgroundColor', board.attributes.prefs.backgroundColor);
     
     var options = {
@@ -47,12 +52,5 @@ Trill.Views.IndexView = Backbone.View.extend({
   },
 
   render: function() {
-    this.boards.fetch();
-
-    // { success: function(boards) {
-    //   for (var i in boards.models) {
-    //     self.lists.fetch(boards.models[i].get('id'));
-    //   }
-    // }
   }
 });
