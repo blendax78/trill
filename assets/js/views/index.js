@@ -11,23 +11,27 @@ Trill.Views.IndexView = Backbone.View.extend({
     this.lists = new Trill.Collections.Lists();
     this.cards = new Trill.Collections.Cards();
 
-    _.bindAll(this, 'changeBoard', 'renderBoard');
+    _.bindAll(this, 'changeBoard', 'render');
 
-    $('#body').on('boardsSync', function() {
-      this.current_board = this.current_board || this.boards[0];
-      self.renderBoard(this.current_board);
-      $('#board_change').html(ich.board_change_template({ boards: self.boards.models }).html());
+    this.cards.on('sync', function(board_id) {
+      // 'this' refers to this.cards in this context.
+
+      if (this.models.length > 0 && this.at(0).get('idBoard') === board_id && !this.rendered) {
+        self.render(self.current_board);
+        this.rendered = true;
+      }
     });
 
     this.boards.on('sync', function() {
-      self.current_board = this.models[0];
+
+      self.current_board = this.at(0);
       // 'this' refers to this.boards in this context.
+      $('#board_change').html(ich.board_change_template({ boards: this.toJSON() }).html());
+
       for (var i in this.models) {
         self.lists.fetch(this.models[i].get('id'));
         self.cards.fetch(this.models[i].get('id'));
       }
-
-      self.renderBoard(self.current_board);
     });
 
     this.boards.fetch();
@@ -35,22 +39,24 @@ Trill.Views.IndexView = Backbone.View.extend({
   
   changeBoard: function(evt) {
     var $elem = $(evt.target);
-    
-    var board = _.findWhere(this.boards.models, { id: $elem.data().id });
-    this.current_board = board;
-    this.renderBoard(board);
+
+    var board = this.boards.where({ id: $elem.data().id });
+
+    this.current_board = board[0];
+    this.render(this.current_board);
   },
   
-  renderBoard: function(board) {
+  render: function(board) {
     $(this.el).html(ich.main_board_template({ board: board, lists: [] }).html());
+
     $('body').css('backgroundColor', board.attributes.prefs.backgroundColor);
     
     var options = {
         animate: true
     };
     $('.grid-stack').gridstack(options);
-  },
 
-  render: function() {
+    // For some reason, backbone can't bind events to bootstrap menus.
+    $('.board-select').on('click', this.changeBoard);
   }
 });

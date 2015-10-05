@@ -9,7 +9,6 @@ var Router = Backbone.Router.extend({
 
   index: function() {
     this.indexView = new Trill.Views.IndexView;
-    this.indexView.render();
   }
 
 });
