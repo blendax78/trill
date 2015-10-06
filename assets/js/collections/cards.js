@@ -23,7 +23,6 @@ Trill.Collections.Cards = Backbone.Collection.extend({
           self.models.push(temp);
         }
 
-        $('body').trigger('boardsSync');
         self.trigger('sync', self.at(0).get('idBoard'));
     });
   },

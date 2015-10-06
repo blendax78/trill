@@ -47,6 +47,7 @@ Trill.Views.IndexView = Backbone.View.extend({
   },
   
   render: function(board) {
+    console.log('render', board);
     var cards = this.cards.where({ idBoard: board.get('id')});
     console.log(cards);
     $(this.el).html(ich.main_board_template({ board: board.toJSON(), cards: cards, lists: [] }).html());
