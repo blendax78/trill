@@ -12,15 +12,13 @@
 <script id="main_board_template" type="text/html">
 <div class="row">
   {{#board}}
-    {{#attributes}}
-      <h1>{{name}}</h1>
-    {{/attributes}}
-    {{#lists}}
-      {{#models}}
-        {{>list_template}}
-      {{/models}}
-    {{/lists}}
+    <h1>{{name}}</h1>
   {{/board}}
+  <div class="grid-stack">
+  {{#cards}}
+    {{>card_template}}
+  {{/cards}}
+  </div>
 </div>
 </script>
 
@@ -41,10 +39,8 @@
 
 <script id="card_template" type="text/html">
   <div class="grid-stack-item" data-gs-auto-position="1" data-gs-width="3" data-gs-height="3">
-    {{#attributes}}
-      <p>
-        <div class="card grid-stack-item-content">{{name}}</div>
-      </p>
-    {{/attributes}}
+    <p>
+      <div class="card grid-stack-item-content">{{name}}</div>
+    </p>
   </div>
 </script>
