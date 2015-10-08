@@ -13,7 +13,7 @@ Trill.Views.IndexView = Backbone.View.extend({
 
     _.bindAll(this, 'changeBoard', 'render');
 
-    this.cards.on('sync', function(board_id) {
+    this.cards.on('cardsSync', function(board_id) {
       // 'this' refers to this.cards in this context.
 
       if (this.models.length > 0 && this.at(0).get('idBoard') === board_id && !this.rendered) {
@@ -30,7 +30,7 @@ Trill.Views.IndexView = Backbone.View.extend({
 
       for (var i in this.models) {
         self.lists.fetch(this.models[i].get('id'));
-        self.cards.fetch(this.models[i].get('id'));
+        self.cards.fetch(this.models[i].get('id'), self.current_board.get('id'));
       }
     });
 
@@ -47,9 +47,7 @@ Trill.Views.IndexView = Backbone.View.extend({
   },
   
   render: function(board) {
-    console.log('render', board);
     var cards = this.cards.where({ idBoard: board.get('id')});
-    console.log(cards);
     $(this.el).html(ich.main_board_template({ board: board.toJSON(), cards: cards, lists: [] }).html());
 
     $('body').css('backgroundColor', board.attributes.prefs.backgroundColor);

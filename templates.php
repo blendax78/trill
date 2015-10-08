@@ -39,8 +39,20 @@
 
 <script id="card_template" type="text/html">
   <div class="grid-stack-item" data-gs-auto-position="1" data-gs-width="3" data-gs-height="3">
+    {{#attributes}}
     <p>
-      <div class="card grid-stack-item-content">{{name}}</div>
+      <div class="card grid-stack-item-content">{{name}}
+        {{#attachments}}
+          {{>attachment_template}}
+        {{/attachments}}
+      </div>
     </p>
+    {{/attributes}}
+  </div>
+</script>
+
+<script id="attachment_template" type="text/html">
+  <div>
+  
   </div>
 </script>
