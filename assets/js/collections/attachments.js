@@ -14,7 +14,9 @@ Trill.Collections.Attachments = Backbone.Collection.extend({
         for (var i in results) {
           temp = new Trill.Models.Attachment(results[i]);
           self.models.push(temp);
+          // console.log(temp);
         }
+        console.log('attach sync');
     });
   }
 });

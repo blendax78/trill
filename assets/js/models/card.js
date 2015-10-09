@@ -5,5 +5,14 @@ Trill.Models.Card = Backbone.Model.extend({
     attachments.fetch();
 
     this.set('attachments', attachments);
+  },
+
+  renderAttachments: function() {
+    var attachments = this.get('attachments').models;
+    var attachmentsJSON = _.map(attachments, function(attachment) {
+      return attachment.toJSON();
+    });
+
+    return attachmentsJSON;
   }
 });

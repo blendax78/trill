@@ -13,5 +13,4 @@ Basic setup: Requires a config.json to be in the root folder (same as index.php)
 ```
 
 **To Do**
-
-jsonify objects going into templates
+attachments not finishing syncing by time of render

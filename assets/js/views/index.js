@@ -47,7 +47,11 @@ Trill.Views.IndexView = Backbone.View.extend({
   },
   
   render: function(board) {
-    var cards = this.cards.where({ idBoard: board.get('id')});
+    var cards = _.map(this.cards.where({ idBoard: board.get('id')}), function(card) {
+      card.attachmentsJSON = card.renderAttachments();
+      return card.toJSON();
+    });
+console.log(cards, _.pluck(cards, 'renderAttachments'));
     $(this.el).html(ich.main_board_template({ board: board.toJSON(), cards: cards, lists: [] }).html());
 
     $('body').css('backgroundColor', board.attributes.prefs.backgroundColor);
