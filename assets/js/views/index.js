@@ -22,6 +22,10 @@ Trill.Views.IndexView = Backbone.View.extend({
       }
     });
 
+    this.on('attachmentsSync', function(attachment) {
+      console.log('attachmentsSync', attachment.toJSON());
+    });
+
     this.boards.on('sync', function() {
 
       self.current_board = this.at(0);
@@ -51,7 +55,7 @@ Trill.Views.IndexView = Backbone.View.extend({
       card.attachmentsJSON = card.renderAttachments();
       return card.toJSON();
     });
-console.log(cards, _.pluck(cards, 'renderAttachments'));
+
     $(this.el).html(ich.main_board_template({ board: board.toJSON(), cards: cards, lists: [] }).html());
 
     $('body').css('backgroundColor', board.attributes.prefs.backgroundColor);
