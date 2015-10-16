@@ -22,8 +22,16 @@ Trill.Views.IndexView = Backbone.View.extend({
       }
     });
 
-    this.on('attachmentsSync', function(attachment) {
-      console.log('attachmentsSync', attachment.toJSON());
+    this.on('attachmentsSync', function(attachments) {
+      if (attachments.length > 0) {
+        var first = attachments.shift();
+        var container = $('#' + first.get('card_id'));
+
+        container.append(ich.attachment_template({ attachments: attachments.toJSON()}));
+        container.css('overflow', 'hidden');
+        container.find('img').css('maxWidth', container.width() - 10);
+        // container.find('img').css('maxWidth', container.width());
+      }
     });
 
     this.boards.on('sync', function() {

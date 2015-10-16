@@ -50,14 +50,11 @@
 
 <script id="attachment_template" type="text/html">
   <div>
-    ho
-    {{#models}}
-      {{#attributes}}
-        1
-        {{#previews}}
-          2
-        {{/previews}}
-      {{/attributes}}
-    {{/models}}
+    {{#attachments}}
+      {{#thumbnail}}
+        <img src="{{url}}" />
+      {{/thumbnail}}
+      1
+    {{/attachments}}
   </div>
 </script>

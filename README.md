@@ -13,4 +13,5 @@ Basic setup: Requires a config.json to be in the root folder (same as index.php)
 ```
 
 **To Do**
-attachments not finishing syncing by time of render
+in index.js, thumbnail size should be determined based on card size.
+re-introduce lists
