@@ -54,7 +54,6 @@
       {{#thumbnail}}
         <img src="{{url}}" />
       {{/thumbnail}}
-      1
     {{/attachments}}
   </div>
 </script>

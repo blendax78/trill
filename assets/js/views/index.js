@@ -28,9 +28,23 @@ Trill.Views.IndexView = Backbone.View.extend({
         var container = $('#' + first.get('card_id'));
 
         container.append(ich.attachment_template({ attachments: attachments.toJSON()}));
-        container.css('overflow', 'hidden');
-        container.find('img').css('maxWidth', container.width() - 10);
-        // container.find('img').css('maxWidth', container.width());
+        var attachment = attachments.at(0);
+
+        if (attachment && attachment.get('thumbnail') && container.closest('.grid-stack-item').length > 0) {
+          var griditem = container.closest('.grid-stack-item').data('_gridstack_node');
+          var thumb = attachment.get('thumbnail');
+          var w = 3;
+          var h = 3;
+          if (thumb.width > 400) {
+            w = 6;
+          }
+          
+          if (thumb.height > 400) {
+            h = 6;
+          }
+          
+          self.grid.resize(griditem.el, w, h);
+        }
       }
     });
 
@@ -72,6 +86,7 @@ Trill.Views.IndexView = Backbone.View.extend({
         animate: true
     };
     $('.grid-stack').gridstack(options);
+    this.grid = $('.grid-stack').data('gridstack');
 
     // For some reason, backbone can't bind events to bootstrap menus.
     $('.board-select').on('click', this.changeBoard);

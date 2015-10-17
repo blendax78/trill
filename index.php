@@ -56,6 +56,7 @@
         .script('assets/js/libs/underscore-min.js').wait()
         .script('assets/js/libs/backbone-min.js').wait()
         .script('assets/jquery-ui-1.11.4/jquery-ui.min.js').wait()
+        .script('assets/js/libs/jquery.ui.touch-punch.min.js').wait()
         .script('assets/gridstack/gridstack.min.js').wait()
         .script('assets/js/models/attachment.js').wait()
         .script('assets/js/collections/attachments.js').wait()
